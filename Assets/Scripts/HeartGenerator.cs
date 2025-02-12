@@ -47,15 +47,15 @@ public class HeartGenerator : MonoBehaviour
         time += Time.deltaTime;
         float heartbeat = 0f;
         float beatTime = time % 2f;
-        if (beatTime < 0.2f)  // First beat (sharp spike)
+        if (beatTime < 0.2f)  // First beat
         {
             heartbeat = Mathf.Pow(Mathf.Sin(beatTime * Mathf.PI * 5f), 2);
         }
-        else if (beatTime >= 0.5f && beatTime < 0.7f)  // Second beat (another spike)
+        else if (beatTime >= 0.3f && beatTime < 0.5f)  // Second beat
         {
-            heartbeat = Mathf.Pow(Mathf.Sin((beatTime - 0.5f) * Mathf.PI * 5f), 2);
+            heartbeat = Mathf.Pow(Mathf.Sin((beatTime - 0.3f) * Mathf.PI * 5f), 2);
         }
-        else  // Rest period
+        else
         {
             heartbeat = 0f;
         }
@@ -69,7 +69,7 @@ public class HeartGenerator : MonoBehaviour
             spheres[i].transform.position = Vector3.Lerp(startPosition[i], endPosition[i], lerpFraction);
 
             Renderer sphereRenderer = spheres[i].GetComponent<Renderer>();
-            float hue = (float)i / numshapes; // Hue cycles through 0 to 1
+            float hue = 1; // Hue cycles through 0 to 1
             Color color = Color.HSVToRGB(Mathf.Abs(hue * Mathf.Sin(time)), Mathf.Cos(time), 2f + Mathf.Cos(time));
             sphereRenderer.material.color = color;
         }
